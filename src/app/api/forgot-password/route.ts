@@ -47,7 +47,11 @@ export async function POST(request: Request) {
     user.resetPasswordTokenExpiry = new Date(Date.now() + 20 * 60 * 1000);
     await user.save();
 
-    const baseUrl = `${window.location.protocol}//${window.location.host}`;
+    const protocol = request.headers.get("x-forwarded-proto") || "http";
+    const host =
+      request.headers.get("x-forwarded-host") || request.headers.get("host");
+
+    const baseUrl = `${protocol}://${host}`;
 
     const emailResponse = await sendForgotPasswordEmail({
       firstName: user.firstName,
