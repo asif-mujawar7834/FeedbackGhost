@@ -47,9 +47,11 @@ export async function POST(request: Request) {
     user.resetPasswordTokenExpiry = new Date(Date.now() + 20 * 60 * 1000);
     await user.save();
 
+    const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
     const emailResponse = await sendForgotPasswordEmail({
       firstName: user.firstName,
-      url: `http://localhost:3000/reset-password/${token}`,
+      url: `${baseUrl}/reset-password/${token}`,
     });
 
     if (!emailResponse.success) {
