@@ -1,4 +1,3 @@
-import { Asterisk } from "lucide-react";
 import {
   FormControl,
   FormField,

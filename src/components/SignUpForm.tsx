@@ -46,7 +46,7 @@ export default function SignUpForm() {
         setIsCheckingUserName(true);
 
         const res = await fetch(
-          `http://localhost:3000/api/check-username-unique?username=${debouncedValue}`
+          `/api/check-username-unique?username=${debouncedValue}`
         );
 
         const data = await res.json();
